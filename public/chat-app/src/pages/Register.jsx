@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { useNavigate, Form, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../images/logo.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,7 @@ const isPassword = (pass) =>
 const FormContainer = styled.div``;
 
 function Register() {
+  const navigate=useNavigate()
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -68,7 +69,18 @@ function Register() {
         email,
         password,
       });
-      // Handle the response data as needed
+     if(data.status===401){
+      toast.error("this username is already exist", toastOptions);
+     }
+    else if(data.status===402){
+      toast.error("this email is already exist", toastOptions);
+     }
+     else if(data.status===400){
+      toast.error("there is something wrong happened please try agin ", toastOptions);
+     } else if(data.status===200){
+      localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+      navigate('/')
+    }
     }
   };
 
