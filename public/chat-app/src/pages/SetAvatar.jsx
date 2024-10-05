@@ -19,6 +19,11 @@ function SetAvatar() {
         pauseOnHover: true,
         theme: "dark",
     };
+    useEffect(()=>{
+        if(!localStorage.getItem('chat-app-user')){
+            navigate('/Login')
+          }
+    },[])
     const Container = styled.div`
       display: flex;
   justify-content: center;
@@ -41,6 +46,7 @@ if(selectedAvatar===undefined){
         user.isAvatarImageSet=true
         user.avatarImage=data.image
         localStorage.setItem('chat-app-user',JSON.stringify(user))
+        navigate('/')
     }else{
         toast.error('something wrong happened please try again ',toastOptions)
 

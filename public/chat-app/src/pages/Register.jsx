@@ -79,7 +79,7 @@ function Register() {
       toast.error("there is something wrong happened please try agin ", toastOptions);
      } else if(data.status===200){
       localStorage.setItem('chat-app-user', JSON.stringify(data.user));
-      navigate('/')
+      navigate('/setAvatar')
     }
     }
   };

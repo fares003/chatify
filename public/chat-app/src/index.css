@@ -117,3 +117,63 @@ a{
 .loader {
   max-inline-size: 100%;
 }
+.chat-container{
+background-color: #0a0a13;
+height: 85vh;
+width: 85vw;
+display: grid;
+grid-template-columns: 0.25fr 0.75fr; 
+grid-template-rows: 1fr; 
+}
+.contacts{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  align-items: center;
+  background-color: #0a051f;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.contacts::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 5px;
+}
+
+/* Track */
+.contacts::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+.contacts::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.contacts::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.contact{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin: 10px;
+  background-color: #3d3b50;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 350px;
+  word-wrap: break-word;
+}
+.selected-contact{
+  background-color: #8c83ee;
+}
+.contacts .title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+
+}
