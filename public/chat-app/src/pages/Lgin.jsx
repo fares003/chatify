@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../images/logo.svg";
@@ -23,7 +23,11 @@ function Lgin() {
     draggable: true,
     theme: "dark",
   };
-
+useEffect(()=>{
+  if(localStorage.getItem('chat-app-user')){
+    navigate('/')
+  }
+},[])
   const handleValidation = () => {
     const { email, password } = values;
     if (email.length <= 3) {
@@ -83,6 +87,9 @@ function Lgin() {
           onChange={handleChange}
         />
         <button type="submit">Login</button>
+        <span>
+            do not have an account? <Link to="/Register">Register</Link>
+          </span>
       </form>
       <ToastContainer />
     </FormContainer>
