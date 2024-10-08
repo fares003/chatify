@@ -8,39 +8,37 @@ import { contactsRoute, setAvatarRoute } from "../utils/ApiRoutes";
 import axios from 'axios';
 import { Buffer } from "buffer";
 import Logo from "../images/logo.svg";
-
-export default function Contacts() {
-    const [users, setUsers] = useState();
-    const [contacts, setContacts] = useState([]);
-    const [currentUser, setCurrentUser] = useState();
-    const [selectedContact, setSelectedContact] = useState();
-    const navigate = useNavigate();
-
+const Container=styled.div`
+      display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: #131324;
+  height: 100vh;
+  width: 100vw;
+`
+export default function Contacts({ contacts, changeChat }) {
+    const [currentUserName, setCurrentUserName] = useState(undefined);
+    const [currentUserImage, setCurrentUserImage] = useState(undefined);
+    const [currentSelected, setCurrentSelected] = useState(undefined);
     useEffect(() => {
-        if (!localStorage.getItem('chat-app-user')) {
-            navigate('/login');
-        } else {
-            setCurrentUser(JSON.parse(localStorage.getItem('chat-app-user')));
-        }
-    }, []);
+        const fetchData = async () => {
+          const data = await JSON.parse(localStorage.getItem('chat-app-user'));
+          setCurrentUserName(data.username);
+          setCurrentUserImage(data.avatarImage);
+        };
+      
+        fetchData();
+      }, []);
+    const changeCurrentChat = (index, contact) => {
+      setCurrentSelected(index);
+      changeChat(contact);
+    };
 
-    useEffect(() => {
-        if (currentUser) {
-            const fetchContacts = async () => {
-                try {
-                    const contactsApi = await axios.get(`${contactsRoute}/${currentUser._id}`);
-                    setContacts(contactsApi.data);
-                } catch (error) {
-                    toast.error("Failed to fetch contacts");
-                }
-            };
-
-            fetchContacts();
-            console.log(contacts);
-        }
-    }, [currentUser]);
 
     return (
+<div className="contact-part">
         <div className='contacts'>
             <div className="title">
                 <img src={Logo} alt="" />
@@ -49,13 +47,22 @@ export default function Contacts() {
             {
                 contacts.map((contact, index) => {
                     return (
-                        <div className={`contact ${selectedContact === index ? 'selected-contact' : ''}`} key={contact._id} onClick={() => { setSelectedContact(index) }}>
+                        <div className={`contact ${currentSelected === index ? 'selected-contact' : ''}`} key={contact._id} onClick={() => {  changeCurrentChat(index, contact) }}>
                             <img src={`data:image/svg+xml;base64,${contact.avatarImage}`} alt="avatar" className="avatar"></img>
                             <h3 className="username">{contact.username}</h3>
                         </div>
                     )
                 })
             }
+        </div>
+        <div className="currentUser">
+            <div className="avatar-user">
+                <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="" />
+            </div>
+            <div className="username">
+                <h1>{currentUserName}</h1>
+            </div>
+        </div>
         </div>
     )
 }
