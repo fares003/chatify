@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: white;
 }
 
 body,button,input{
@@ -124,6 +123,7 @@ width: 85vw;
 display: grid;
 grid-template-columns: 0.25fr 0.75fr; 
 grid-template-rows: 1fr; 
+color: white;
 }
 .contacts{
   display: flex;
@@ -211,13 +211,11 @@ width: 350px;
   color: #3b04d3;
 }
 .chatContainer{
-  display: flex;
-  flex-direction: column;
-}
-.chat-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  gap: 0.1rem;
+  overflow: hidden;
+
 }
 .userinfo{
   display: flex;
@@ -238,4 +236,96 @@ width: 350px;
 }
 .quit svg{
   font-size: 1.5rem;
+}
+.emoji{
+  position: relative;
+}
+.chatInputContainer{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.inputContainer{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: #ffffff34;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 0;
+}
+.inputContainer input{
+  width: 90%;
+  height: 60%;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+
+}
+.inputContainer input::selection {
+  background-color: #9a86f3;
+}
+.inputContainer input:focus {
+  outline: none;
+}
+.submit{
+  height: 100%;
+  padding: 0.6rem 0.1rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #9a86f3;
+  border: none;
+  width: 100px;
+}
+.submit  svg {
+  font-size: 2rem;
+  color: white;
+}
+.emoji {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+}
+.emoji  svg {
+  font-size: 1.5rem;
+  color: #ffff00c8 !important;
+  cursor: pointer;
+}
+.chat-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 50px;
+}
+.emoji-cont  {
+  position: absolute !important;
+  top: -477px;
+  left: 15px;
+
+  background-color: #080420 !important;
+  box-shadow: 0 5px 10px #9a86f3;
+  border-color: #9a86f3 !important;
+}
+.emoji-cont  h2{
+  background-color: #080420 !important;
+  
+}
+.emoji-cont  input{
+  background-color: #080420 !important;
+  
+}
+.emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar {
+    background-color: #080420;
+    width: 5px;
+  }
+  .epr_-bbny0t{
+  display: none ;
 }

@@ -1,7 +1,19 @@
 import React from 'react'
 import Logout from './Logout'
+import ChatInput from './ChatInput'
+import Messages from './Messages'
+import axios from'axios'
+import { sendMessageRoute } from '../utils/ApiRoutes'
 
-export default function ChatContainer({currentChat}) {
+export default function ChatContainer({currentChat,currentUser}) {
+  const handleSendMsg=async(msg)=>{
+    await axios.post(sendMessageRoute,{
+      from:currentUser._id,
+      to:currentChat._id,
+      message:msg,
+
+    }) 
+  }
   return (
     <div className='chatContainer'>
       <div className="chat-header">
@@ -16,10 +28,9 @@ export default function ChatContainer({currentChat}) {
         </div>
         </div>
 <Logout/>
-
-
-
       </div>
+<Messages/>
+<ChatInput handleSendMsg={handleSendMsg}/>
     </div>
   )
 }
