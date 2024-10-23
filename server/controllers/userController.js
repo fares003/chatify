@@ -17,12 +17,13 @@ module.exports.register=async(req,res,next)=>{
             password:hashedPassword
         })
     delete user.password
-    return res.json({status:200,user})
+    return res.json({status:201,user})
     } catch (error) {
        next(error)
     }
  
 }
+
 module.exports.login = async (req, res, next) => {
     try {
       const { email, password } = req.body;
