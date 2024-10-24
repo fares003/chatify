@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate, Form, Link } from "react-router-dom";
 import styled from "styled-components";
 import loader from "../images/loader.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { contactsRoute, setAvatarRoute } from "../utils/ApiRoutes";
+import { contactsRoute, host, setAvatarRoute } from "../utils/ApiRoutes";
 import axios from 'axios';
 import { Buffer } from "buffer";
 import Logo from "../images/logo.svg";
@@ -12,7 +12,9 @@ import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import ChatInput from "../components/ChatInput";
+import {io} from'socket.io-client'
 function Chat() {
+  const socket=useRef()
   const [users, setUsers] = useState();
   const [currentUser, setCurrentUser] = useState();
   const [selectedContact, setSelectedContact] = useState();
@@ -20,11 +22,17 @@ function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if(currentUser){
+      socket.current=io(host)
+      socket.current.emit('add-user',currentUser._id)
+    }
+  },[currentUser])
+
   useEffect(() => {
     if (!localStorage.getItem('chat-app-user')) {
         navigate('/login');
     } else {
-      console.log(JSON.parse(localStorage.getItem('chat-app-user')))
         setCurrentUser(JSON.parse(localStorage.getItem('chat-app-user')));
         
     }
@@ -42,7 +50,6 @@ useEffect(() => {
         };
 
         fetchContacts();
-        console.log(contacts);
     }
 }, [currentUser]);
 const handleChatChange = (chat) => {
@@ -57,7 +64,7 @@ const handleChatChange = (chat) => {
 {
   currentChat===undefined?<Welcome currentUser={currentUser}/>:
 
-  <ChatContainer currentChat={currentChat} currentUser={currentUser}/>
+  <ChatContainer currentChat={currentChat} currentUser={currentUser} />
 
 
 }

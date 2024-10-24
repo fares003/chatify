@@ -329,3 +329,41 @@ width: 350px;
   .epr_-bbny0t{
   display: none ;
 }
+.chatMessages{
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px;
+  overflow-y: scroll;
+
+}
+.message{
+  background-color: #110b31;
+  width: fit-content;
+  padding: 15px;
+  border-radius: 10px;
+}
+.sended{
+  float: right;
+}
+.chatMessages::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 5px;
+}
+
+/* Track */
+.chatMessages::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+.chatMessages::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.chatMessages::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
