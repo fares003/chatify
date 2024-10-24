@@ -44,6 +44,7 @@ export default function Contacts({ contacts, changeChat }) {
                 <img src={Logo} alt="" />
                 <h1>CHATFY</h1>
             </div>
+            <div className="contacts-data">
             {
                 contacts.map((contact, index) => {
                     return (
@@ -54,6 +55,7 @@ export default function Contacts({ contacts, changeChat }) {
                     )
                 })
             }
+            </div>
         </div>
         <div className="currentUser">
             <div className="avatar-user">
