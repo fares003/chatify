@@ -77,7 +77,7 @@ function Register() {
      }
      else if(data.status===400){
       toast.error("there is something wrong happened please try agin ", toastOptions);
-     } else if(data.status===200){
+     } else if(data.status===201){
       localStorage.setItem('chat-app-user', JSON.stringify(data.user));
       navigate('/setAvatar')
     }
